@@ -1,6 +1,7 @@
 using KanbanApp.Backend.Data;
 using KanbanApp.Backend.Extensions;
 using KanbanApp.Backend.Endpoints;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +54,13 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+if (string.IsNullOrWhiteSpace(app.Configuration.GetConnectionString("DefaultConnection")))
+    throw new InvalidOperationException("Set ConnectionStrings__DefaultConnection before starting the backend.");
+
+var jwtKey = app.Configuration["Jwt:Key"];
+if (string.IsNullOrWhiteSpace(jwtKey) || Encoding.UTF8.GetByteCount(jwtKey) < 32)
+    throw new InvalidOperationException("Set Jwt__Key to at least 32 UTF-8 bytes before starting the backend.");
 
 app.RunMigrations();
 app.UseStaticFiles();

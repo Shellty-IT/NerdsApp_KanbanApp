@@ -1,0 +1,8 @@
+.git
+**/bin/
+**/obj/
+**/node_modules/
+**/.env
+**/.env.*
+KanbanApp.Backend/appsettings.Production.json
+KanbanApp.Backend/appsettings.*.local.json

@@ -168,20 +168,14 @@ dotnet ef database update
 dotnet run
 API: http://localhost:5067
 Swagger: http://localhost:5067/swagger
-appsettings.Development.json:
+Configure secrets outside Git before starting the backend:
 
-JSON
+- `ConnectionStrings__DefaultConnection`: PostgreSQL connection string.
+- `Jwt__Key`: a random signing key of at least 32 UTF-8 bytes.
 
-{
-  "Jwt": {
-    "Key": "your-secret-key-minimum-32-characters"
-  },
-  "ConnectionStrings": {
-    "DefaultConnection": "Data Source=kanban.db"
-  }
-}
+Set these as environment variables locally and in Render. Never commit real values to `appsettings*.json`.
 Deployment
-Deployed to Render (Backend) and Vercel (Frontend) on every push to main via GitHub Actions.
+Render (backend) and Vercel (frontend) deploy automatically from `main`; GitHub Actions verifies the build and tests.
 
 
 push to main

@@ -16,6 +16,7 @@ public class KanbanWebAppFactory : WebApplicationFactory<Program>
             config.AddInMemoryCollection(new Dictionary<string, string?>
             {
                 ["RateLimiting:Disabled"] = "true",
+                ["ConnectionStrings:DefaultConnection"] = "Host=localhost;Database=unused;Username=unused",
                 ["Jwt:Key"] = "TestJwtKeyForKanbanAppTests1234567890",
                 ["Jwt:Issuer"] = "http://localhost",
                 ["Jwt:Audience"] = "http://localhost"
