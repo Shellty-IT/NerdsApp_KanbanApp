@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { DragDropContext, Droppable } from '@hello-pangea/dnd';
-import api from '../services/api';
+import api, { assetUrl } from '../services/api';
 import Column from '../components/Column';
 import ColumnForm from '../components/ColumnForm';
 import InviteModal from '../components/InviteModal';
@@ -249,7 +249,7 @@ export default function BoardView() {
                                     <li key={m.userId} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                                             {m.profilePictureUrl
-                                                ? <img src={m.profilePictureUrl} alt="" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
+                                                ? <img src={assetUrl(m.profilePictureUrl)} alt="" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
                                                 : <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--surface-2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>👤</div>
                                             }
                                             <div>

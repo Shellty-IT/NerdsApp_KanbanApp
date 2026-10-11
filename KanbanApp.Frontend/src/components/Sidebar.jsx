@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import NavIcon, { GripIcon } from './NavIcons';
+import { assetUrl } from '../services/api';
 
 const NAV = [
     { to: '/dashboard', label: 'Projects', icon: 'projects' },
@@ -27,6 +28,7 @@ function initials(user) {
 }
 
 export default function Sidebar({ user, onLogout, onOpenPrivacy, dock, isMobile }) {
+    const location = useLocation();
     const { mode, collapsed, position, setMode, setPosition, toggleCollapsed } = dock;
 
     const effectiveMode = isMobile ? 'bottom' : mode;
@@ -165,7 +167,7 @@ export default function Sidebar({ user, onLogout, onOpenPrivacy, dock, isMobile 
             key={item.to}
             to={item.to}
             title={isCollapsed ? item.label : undefined}
-            className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
+            className={({ isActive }) => `nav-item${isActive || (item.to === '/dashboard' && /^\/(projects|board)\//.test(location.pathname)) ? ' active' : ''}`}
         >
             <span className="nav-item-icon"><NavIcon name={item.icon} /></span>
             {!isCollapsed && <span className="nav-item-label">{item.label}</span>}
@@ -175,7 +177,7 @@ export default function Sidebar({ user, onLogout, onOpenPrivacy, dock, isMobile 
     const avatar = (
         <div className="nav-avatar" title={user ? `${user.userName}\n${user.email}` : undefined}>
             {user?.profilePictureUrl
-                ? <img src={user.profilePictureUrl} alt="avatar" />
+                ? <img src={assetUrl(user.profilePictureUrl)} alt="avatar" />
                 : initials(user)}
         </div>
     );

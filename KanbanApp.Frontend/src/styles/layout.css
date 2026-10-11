@@ -106,8 +106,7 @@
     .topbar-right {
         grid-column: 1 / -1;
         grid-row: 2;
-        justify-content: flex-start;
-        overflow-x: auto;
+        align-items: flex-start;
         padding-bottom: 2px;
     }
 

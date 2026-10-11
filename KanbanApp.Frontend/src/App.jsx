@@ -10,6 +10,7 @@ import Sidebar from './components/Sidebar';
 import { useToast } from './hooks/useToast';
 import { useNavDock } from './hooks/useNavDock';
 import { useIsMobile } from './hooks/useIsMobile';
+import { stopConnection } from './services/signalr';
 
 function contentStyle(mode, collapsed, isMobile) {
     if (isMobile) return { marginLeft: 0, marginRight: 0, paddingBottom: '84px' };
@@ -37,7 +38,12 @@ export default function App() {
         api.get('/api/users/me').then(res => setUser(res.data)).catch(() => {});
     }, [location.pathname]);
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        const refreshToken = localStorage.getItem('refreshToken');
+        if (refreshToken) {
+            await api.post('/api/auth/logout', { refreshToken }, { timeout: 3000 }).catch(() => {});
+        }
+        await stopConnection().catch(() => {});
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
         navigate('/login');

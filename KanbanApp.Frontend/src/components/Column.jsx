@@ -106,10 +106,11 @@ export default function Column({
                                     {column.cards.map((card, index) => (
                                         <Draggable key={card.id} draggableId={String(card.id)} index={index}>
                                             {(provided, snapshot) => (
-                                                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                                <div ref={provided.innerRef} {...provided.draggableProps}>
                                                     <Card
                                                         card={card}
                                                         isDragging={snapshot.isDragging}
+                                                        dragHandleProps={provided.dragHandleProps}
                                                         onUpdate={onUpdateCard}
                                                         onDelete={onDeleteCard}
                                                         onUploadImage={onUploadCardImage}

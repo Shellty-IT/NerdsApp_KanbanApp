@@ -9,6 +9,7 @@ vi.mock('../services/api', () => ({
         delete: vi.fn().mockResolvedValue({ data: {} }),
     },
     BASE_URL: 'http://localhost:5067',
+    assetUrl: url => url,
 }));
 
 const mockConnection = {
@@ -27,6 +28,7 @@ vi.mock('../services/signalr', () => ({
     trackBoard: vi.fn(),
     untrackBoard: vi.fn(),
     getCurrentUserId: vi.fn(() => null),
+    stopConnection: vi.fn().mockResolvedValue(undefined),
 }));
 
 vi.mock('../hooks/useSignalREvents', () => ({

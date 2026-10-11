@@ -45,6 +45,13 @@ export function untrackBoard(boardId) {
     _trackedBoards.delete(String(boardId));
 }
 
+export async function stopConnection() {
+    _trackedBoards.clear();
+    if (_connection && _connection.state !== HubConnectionState.Disconnected) {
+        await _connection.stop();
+    }
+}
+
 export function getCurrentUserId() {
     const token = localStorage.getItem('token');
     if (!token) return null;

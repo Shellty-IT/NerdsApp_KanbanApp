@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import api from '../services/api';
+import api, { assetUrl } from '../services/api';
 
 export default function ProfilePage() {
     const [profile, setProfile] = useState(null);
@@ -120,7 +120,7 @@ export default function ProfilePage() {
                             }}
                         >
                             {profile.profilePictureUrl
-                                ? <img src={profile.profilePictureUrl} alt="avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                ? <img src={assetUrl(profile.profilePictureUrl)} alt="avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                 : initials
                             }
                         </button>

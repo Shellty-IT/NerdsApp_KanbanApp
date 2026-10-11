@@ -27,9 +27,10 @@ export default function RegisterPage() {
         setError('');
         setLoading(true);
         try {
-            await api.post('/register', { userName: username, email, password });
+            await api.post('/register', { userName: username.trim(), email, password });
             const loginResponse = await api.post('/login', { email, password });
             localStorage.setItem('token', loginResponse.data.accessToken);
+            localStorage.setItem('refreshToken', loginResponse.data.refreshToken);
             navigate('/dashboard');
         } catch (err) {
             setError(err.response?.data?.message || 'Registration failed');
@@ -52,6 +53,8 @@ export default function RegisterPage() {
                             value={username}
                             onChange={e => setUsername(e.target.value)}
                             placeholder="johndoe"
+                            pattern="[a-zA-Z0-9._@+\-]+"
+                            title="Use letters, numbers, and . _ @ + - without spaces"
                             required
                         />
                     </div>

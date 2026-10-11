@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import api, { BASE_URL } from '../services/api';
+import api, { BASE_URL, assetUrl } from '../services/api';
 import { useTopbar } from '../context/TopbarContext';
 import ConfirmDialog from '../components/ConfirmDialog';
 import FocalPointPicker from '../components/FocalPointPicker';
@@ -305,7 +305,7 @@ export default function ProjectView() {
                                     <li key={m.userId} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                                             {m.profilePictureUrl
-                                                ? <img src={m.profilePictureUrl} alt="" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
+                                                ? <img src={assetUrl(m.profilePictureUrl)} alt="" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
                                                 : <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--surface-2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px' }}>👤</div>
                                             }
                                             <div>

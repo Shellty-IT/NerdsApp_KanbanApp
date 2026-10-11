@@ -187,6 +187,8 @@
     gap: 4px;
     flex: 1;
     min-height: 0;
+    margin: -12px;
+    padding: 12px;
     overflow-y: auto;
 }
 
@@ -194,6 +196,8 @@
     flex-direction: row;
     flex: 0 0 auto;
     gap: 4px;
+    margin: 0;
+    padding: 0;
     overflow: visible;
 }
 
@@ -218,7 +222,7 @@
     background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
     color: #04121c;
     font-weight: 600;
-    box-shadow: 0 10px 24px -10px var(--accent-cyan), var(--glow-cyan);
+    box-shadow: 0 0 0 1px #00d4ff55, 0 0 14px 2px #00d4ff33;
 }
 
 .nav-item.active:hover { color: #04121c; }

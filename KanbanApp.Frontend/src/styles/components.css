@@ -241,11 +241,12 @@
 .board-search {
     display: flex;
     gap: 4px;
-    min-width: 0;
+    flex: 0 0 140px;
 }
 
 .board-search-input {
-    width: 140px;
+    width: 100%;
+    min-width: 0;
     padding: 6px 10px;
     font-size: 13px;
 }
@@ -259,6 +260,7 @@
     font-size: 13px;
     cursor: pointer;
     max-width: 180px;
+    flex-shrink: 0;
 }
 
 .presence-bar {
@@ -372,13 +374,15 @@
 
 @media (max-width: 768px) {
     .board-topbar-actions {
-        width: max-content;
-        max-width: 100%;
+        flex: 1;
+        flex-wrap: wrap;
     }
 
     .board-search-input {
-        width: 150px;
+        width: 100%;
     }
+
+    .board-search { flex-basis: 150px; }
 
     .board-member-filter {
         max-width: 150px;
@@ -392,8 +396,10 @@
 
 @media (max-width: 420px) {
     .board-search-input {
-        width: 132px;
+        width: 100%;
     }
+
+    .board-search { flex-basis: 132px; }
 
     .board-member-filter {
         max-width: 132px;

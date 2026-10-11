@@ -9,11 +9,10 @@ const MAX_RETRY_DELAY_MS = 12000;
 const SESSION_KEY = 'backendWakeConfirmed';
 
 export default function BackendWakeNotice() {
-    const [visible, setVisible] = useState(() => sessionStorage.getItem(SESSION_KEY) !== 'true');
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
         if (sessionStorage.getItem(SESSION_KEY) === 'true') {
-            setVisible(false);
             return;
         }
 
@@ -24,14 +23,12 @@ export default function BackendWakeNotice() {
         }, NOTICE_DELAY_MS);
 
         const pingBackend = async (attempt = 0) => {
-            const controller = new AbortController();
-
             try {
                 const response = await fetch(`${BASE_URL}${WAKE_ENDPOINT}`, {
                     method: 'GET',
-                    cache: 'no-store',
-                    signal: controller.signal
+                    cache: 'no-store'
                 });
+                await response.text();
 
                 if (response.ok) {
                     sessionStorage.setItem(SESSION_KEY, 'true');
@@ -41,8 +38,6 @@ export default function BackendWakeNotice() {
                 }
             } catch {
                 // Cold starts, transient network failures, or extensions can block the probe.
-            } finally {
-                controller.abort();
             }
 
             if (attempt >= MAX_ATTEMPTS || !isMounted) {

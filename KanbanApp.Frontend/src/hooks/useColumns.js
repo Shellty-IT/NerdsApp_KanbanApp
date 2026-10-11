@@ -72,6 +72,7 @@ export function useColumns(boardId, board, setBoard, connection) {
                 name: columnName.trim(), position, color: columnColor
             });
             setBoard(prev => {
+                if (prev.columns.some(c => c.id === response.data.id)) return prev;
                 const updated = JSON.parse(JSON.stringify(prev));
                 updated.columns.push({ ...response.data, cards: [] });
                 return updated;

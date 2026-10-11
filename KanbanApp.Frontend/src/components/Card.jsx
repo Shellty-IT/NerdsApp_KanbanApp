@@ -35,6 +35,7 @@ function getImageSrc(url) {
 export default function Card({
                                  card,
                                  isDragging,
+    dragHandleProps,
                                  onUpdate,
                                  onDelete,
                                  onUploadImage,
@@ -143,6 +144,7 @@ export default function Card({
     return (
         <>
             <div
+                {...dragHandleProps}
                 onClick={openCardModal}
                 style={{
                     background: isDragging ? 'var(--bg-hover)' : 'var(--bg-card)',

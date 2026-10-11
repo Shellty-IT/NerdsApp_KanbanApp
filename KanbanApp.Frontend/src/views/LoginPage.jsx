@@ -18,6 +18,7 @@ export default function LoginPage() {
         try {
             const response = await api.post('/login', { email, password });
             localStorage.setItem('token', response.data.accessToken);
+            localStorage.setItem('refreshToken', response.data.refreshToken);
             navigate('/dashboard');
         } catch (err) {
             setError(err.response?.data?.message || 'Invalid credentials');

@@ -91,6 +91,7 @@ export function useCards(boardId, board, setBoard, setError, connection) {
         try {
             const response = await api.post(`/api/boards/${boardId}/cards`, { title, columnId });
             setBoard(prev => {
+                if (prev.columns.some(col => col.cards.some(card => card.id === response.data.id))) return prev;
                 const updated = JSON.parse(JSON.stringify(prev));
                 const col = updated.columns.find(c => c.id === columnId);
                 col.cards.push(response.data);
