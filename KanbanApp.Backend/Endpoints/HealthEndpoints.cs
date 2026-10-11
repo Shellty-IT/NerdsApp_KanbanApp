@@ -7,6 +7,7 @@ public static class HealthEndpoints
         var healthHandler = () => Results.Ok(new
         {
             status = "healthy",
+            commit = Environment.GetEnvironmentVariable("RENDER_GIT_COMMIT"),
             timestamp = DateTime.UtcNow
         });
 
